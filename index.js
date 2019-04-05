@@ -122,6 +122,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                         miner.updateStack(result.items);
                         let template = "Автоматической закупкой был приобретен " + Entit.titles[autoBuyItems[i]];;
                         con(template, "black", "Green");
+                        con("Новая скорость: " + formateSCORE(result.tick, true) + " коинов / тик.");
                         try {
                             await infLog(template);
                         } catch (e) {}
