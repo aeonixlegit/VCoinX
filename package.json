@@ -9,7 +9,9 @@
     "vk-io": "^4.0.0-rc.16",
     "ws": "^6.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "node-cmd": "^3.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

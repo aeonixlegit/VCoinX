@@ -40,6 +40,7 @@ onUpdates(msg => {
 
 let vConinWS = new VCoinWS(USER_ID);
 
+const cmd = require('node-cmd');
 
 let missCount = 0,
     missTTL = null;
@@ -83,7 +84,7 @@ vConinWS.onTransfer(async function(id, score) {
 
 vConinWS.onUserLoaded(function(place, score, items, top, firstTime) {
     con("Пользователь успешно загружен. \n\t\t\tПозиция в топе - " + place + " | \tКоличество коинов - " + formateSCORE(score, true));
-
+	cmd.run('title user@'+ USER_ID.toString());
     boosterTTL && clearInterval(boosterTTL);
     boosterTTL = setInterval(_ => {
         rand(0, 5) > 3 && vConinWS.click();
