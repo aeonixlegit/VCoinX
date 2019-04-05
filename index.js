@@ -559,15 +559,15 @@ function formatWSS(LINK) {
     URLWS = NADDRWS + CHANNEL + GSEARCH.search + "&pass=".concat(Entit.hashPassCoin(USER_ID, 0));
     switch (currentServer) {
         case 1:
-            URLWS = URLWS.replace("coin.vkforms.ru", "bagosi-go-go.vkforms.ru");
+            URLWS = URLWS.replace(/([\w-]+\.)*vkforms\.ru/, "bagosi-go-go.vkforms.ru");
         case 2:
-            URLWS = URLWS.replace("coin.vkforms.ru", "coin.w5.vkforms.ru");
+            URLWS = URLWS.replace(/([\w-]+\.)*vkforms\.ru/, "coin.w5.vkforms.ru");
         case 3:
-            URLWS = URLWS.replace("coin.vkforms.ru", (CHANNEL > 7) ? "bagosi-go-go.vkforms.ru" : "coin.w5.vkforms.ru");
+            URLWS = URLWS.replace(/([\w-]+\.)*vkforms\.ru/, (CHANNEL > 7) ? "bagosi-go-go.vkforms.ru" : "coin.w5.vkforms.ru");
             break;
 
         default:
-            URLWS = URLWS.replace("coin.vkforms.ru", "coin-without-bugs.vkforms.ru");
+            URLWS = URLWS.replace(/([\w-]+\.)*vkforms\.ru/, "coin-without-bugs.vkforms.ru");
             break;
     }
 
