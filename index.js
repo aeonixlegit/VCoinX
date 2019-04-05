@@ -520,7 +520,7 @@ function updateLink() {
                 if (!mobile_iframe_url)
                     throw ("Не удалось получить ссылку на приложение.\n\t\tВозможное решение: Используйте расширенный токен.");
 
-                let id = (await vk.api.users.get())[0];
+                let id = (await vk.api.users.get())[0]["id"];
 
                 if (!id)
                     throw ("Не удалось получить ID пользователя.");
