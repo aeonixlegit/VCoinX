@@ -121,11 +121,11 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                     await vConinWS.transferToUser(transferTo, transferScore);
                     template = "Автоматически переведено [" + formateSCORE(transferScore * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
                 }
+                transferLastTime = Math.floor(Date.now() / 1000);
                 con(template, "black", "Green");
                 try {
                     await infLog(template);
                 } catch (e) {}
-                transferLastTime = Math.floor(Date.now() / 1000);
             } catch (e) {
                 con("Автоматический перевод не удалася. Ошибка: " + e.message, true);
             }
