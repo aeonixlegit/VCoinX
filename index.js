@@ -352,10 +352,28 @@ rl.on('line', async (line) => {
 
         case 'i':
         case 'info':
+        case 'information':
             con("Версия бота: " + getVersion());
             con("Ваш id: " + USER_ID.toString());
             con("Ваш счет: " + formatScore(vConinWS.confirmScore, true));
-            con("Текущая скорость: " + formatScore(vConinWS.tick, true) + " коинов / тик.\n");
+            con("Текущая скорость: " + formatScore(vConinWS.tick, true) + " коинов / тик");
+            if(transferTo){
+                con("Автоперевод " + transferScore + " коинов пользователю с id " + transferTo + " каждые " + transferInterval + " секунд");
+            } else {
+                con("Автоперевод отключен");
+            }
+            if(autoBuy){
+                con("Автопокупка включена. Для автоматической покупки установлены ускорения:");
+                con("");
+                for (var i = 0; i < autoBuyItems.length; i++){
+                    con(Entit.titles[autoBuyItems[i]]);
+                }
+                con("");
+            } else {
+                con("Автопокупка отключена");
+            }
+            con("Умная покупка " + ( smartBuy ? "включена" : "отключена"));
+            con("");
             break;
 
         case 'color':
