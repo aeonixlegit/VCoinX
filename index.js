@@ -106,7 +106,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
 
     if (place > 0 && !rl.isQst) {
         if (transferPercent) {
-            transferScore = Math.floor(score / 100 * (transferPercent / 100))
+            transferScore = Math.floor(score / 1000 * (transferPercent / 100))
         }
 
         if (transferTo && (transferScore * 1e3 < score || transferScore * 1e3 >= 9e9) && ((Math.floor(Date.now() / 1000) - transferLastTime) > transferInterval)) {
