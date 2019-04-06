@@ -381,7 +381,7 @@ rl.on('line', async (line) => {
 
         case 'b':
         case 'buy':
-            temp = lPrices(true);
+            temp = lPrices(false);
             ccon("-- Доступные ускорения и их цены --", "red");
             ccon(temp);
             item = await rl.questionAsync("Введи название ускорения [cursor, cpu, cpu_stack, computer, server_vk, quantum_pc, datacenter]: ");
