@@ -407,14 +407,15 @@ rl.on('line', async (line) => {
             }
             autoBuyItems = array;
             break;
-
+        case 'ab':
         case 'autobuy':
             autoBuy = !autoBuy;
             con("Автопокупка: " + (autoBuy ? "Включена" : "Отключена"));
             smartBuy = false;
             con("Умная покупка: " + (smartBuy ? "Включена" : "Отключена"));
             break;
-
+                
+        case 'sb':
         case 'smartbuy':
             smartBuy = !smartBuy;
             con("Умная покупка: " + (smartBuy ? "Включена" : "Отключена"));
@@ -494,9 +495,9 @@ rl.on('line', async (line) => {
             ccon("to - указать ID и включить авто-перевод средств на него.");
             ccon("ti - указать интервал для авто-перевода (в секундах).");
             ccon("tsum - указать сумму для авто-перевода (без запятой).");
-            ccon("autobuy - изменить статус авто-покупки.");
+            ccon("(ab) autobuy - изменить статус авто-покупки.");
             ccon("autobuyitem - указать предмет(ы) для авто-покупки.");
-            ccon("smartbuy - изменить статус умной покупки.")
+            ccon("(sb) smartbuy - изменить статус умной покупки.")
             ccon("color - изменить цветовую схему консоли.");
             break;
     }
