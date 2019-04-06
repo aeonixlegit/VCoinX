@@ -465,7 +465,6 @@ rl.on('line', async (line) => {
         case "?":
         case "help":
             ccon("-- VCoinX --", "red");
-            ccon("info	- обновление текущенго уровня.");
             ccon("stop(pause)	- остановка майнера.");
             ccon("start(run)	- запуск майнера.");
             ccon("(b)uy	- покупка улучшений.");
