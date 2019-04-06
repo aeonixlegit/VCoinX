@@ -16,7 +16,7 @@ const {
     con,
     ccon,
     setColorsM,
-    formateSCORE,
+    formatScore,
     hashPassCoin,
     rl,
     existsFile,
@@ -106,7 +106,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
 
     miner.setScore(score);
 
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + "top " + place + " > " + formateSCORE(score, true) + " coins.");
+    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + "top " + place + " > " + formatScore(score, true) + " coins.");
 
     if (place > 0 && !rl.isQst) {
         if (transferPercent) {
@@ -117,10 +117,10 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                 let template;
                 if (transferScore * 1e3 >= 9e9) {
                     await vConinWS.transferToUser(transferTo, score);
-                    template = "Автоматически переведено [" + formateSCORE(score * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
+                    template = "Автоматически переведено [" + formatScore(score * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
                 } else {
                     await vConinWS.transferToUser(transferTo, transferScore);
-                    template = "Автоматически переведено [" + formateSCORE(transferScore * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
+                    template = "Автоматически переведено [" + formatScore(transferScore * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
                 }
                 con(template, "black", "Green");
                 try {
@@ -140,7 +140,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                         miner.updateStack(result.items);
                         let template = "Автоматической покупкой был приобретен " + Entit.titles[autoBuyItems[i]];;
                         con(template, "black", "Green");
-                        con("Новая скорость: " + formateSCORE(result.tick, true) + " коинов / тик.");
+                        con("Новая скорость: " + formatScore(result.tick, true) + " коинов / тик.");
                         try {
                             await infLog(template);
                         } catch (e) {}
@@ -193,7 +193,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                     result = await vConinWS.buyItemById(smartBuyItem);
                     miner.updateStack(result.items);
                     let template = "Умной покупкой был приобретен " + Entit.titles[smartBuyItem];
-                    con("Новая скорость: " + formateSCORE(result.tick, true) + " коинов / тик.");
+                    con("Новая скорость: " + formatScore(result.tick, true) + " коинов / тик.");
                     con(template, "black", "Green");
                     try {
                         await infLog(template);
@@ -210,12 +210,12 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
             updatesLastTime = Math.floor(Date.now() / 1000);
         }
 
-        con("Позиция в топе: " + place + "\tКоличество коинов: " + formateSCORE(score, true), "yellow");
+        con("Позиция в топе: " + place + "\tКоличество коинов: " + formatScore(score, true), "yellow");
     }
 });
 
 vConinWS.onTransfer(async (id, score) => {
-    let template = "Пользватель @id" + USER_ID + " получил [" + formateSCORE(score, true) + "] коинов от @id" + id;
+    let template = "Пользватель @id" + USER_ID + " получил [" + formatScore(score, true) + "] коинов от @id" + id;
     con(template, "green", "Black");
     try {
         await infLog(template);
@@ -226,7 +226,7 @@ vConinWS.onTransfer(async (id, score) => {
 
 vConinWS.onUserLoaded((place, score, items, top, firstTime, tick) => {
     con("Пользователь успешно загружен.");
-    con("Скорость: " + formateSCORE(tick, true) + " коинов / тик.");
+    con("Скорость: " + formatScore(tick, true) + " коинов / тик.");
 
     if (!advertDisp)
     {
@@ -235,7 +235,7 @@ vConinWS.onUserLoaded((place, score, items, top, firstTime, tick) => {
         advertDisp = true;
     }
 
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + formateSCORE(tick, true) + " cps > " + "top " + place + " > " + formateSCORE(score, true) + " coins.");
+    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + formatScore(tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
 
     miner.setActive(items);
     miner.updateStack(items);
@@ -315,7 +315,7 @@ function forceRestart(t, force) {
 function lPrices(d) {
     let temp;
     temp = Entit.names.map(el => {
-        return !miner.hasMoney(el) && d ? "" : "\n> [" + el + "] " + Entit.titles[el] + " - " + formateSCORE(miner.getPriceForItem(el), true);
+        return !miner.hasMoney(el) && d ? "" : "\n> [" + el + "] " + Entit.titles[el] + " - " + formatScore(miner.getPriceForItem(el), true);
     }).toString();
     return temp;
 }
@@ -348,6 +348,14 @@ rl.on('line', async (line) => {
             console.log("transferScore", transferScore);
             console.log("transferInterval", transferInterval);
             console.log("transferLastTime", transferLastTime);
+            break;
+
+        case 'i':
+        case 'info':
+            con("Версия бота: " + getVersion());
+            con("Ваш id: " + USER_ID.toString());
+            con("Ваш счет: " + formatScore(vConinWS.confirmScore, true));
+            con("Текущая скорость: " + formatScore(vConinWS.tick, true) + " коинов / тик.\n");
             break;
 
         case 'color':
@@ -390,7 +398,7 @@ rl.on('line', async (line) => {
                     miner.updateStack(result.items);
                     if (result && result.items)
                         delete result.items;
-                    con("Новая скорость: " + formateSCORE(result.tick, true) + " коинов / тик.");
+                    con("Новая скорость: " + formatScore(result.tick, true) + " коинов / тик.");
                 } catch (e) {
                     if (e.message == "NOT_ENOUGH_COINS") con("Недостаточно средств.", true);
                     else if (e.message == "ITEM NOT FOUND") con("Некорректно указано название предмета.", true);
@@ -473,7 +481,7 @@ rl.on('line', async (line) => {
             try {
                 await vConinWS.transferToUser(id, count);
                 con("Перевод был выполнен успешно.", "black", "Green");
-                let template = "Произведена отпрвка [" + formateSCORE(count * 1e3, true) + "] коинов от vk.com/id" + USER_ID.toString() + " для vk.com/id" + id.toString();
+                let template = "Произведена отпрвка [" + formatScore(count * 1e3, true) + "] коинов от vk.com/id" + USER_ID.toString() + " для vk.com/id" + id.toString();
                 try {
                     await infLog(template);
                 } catch (e) {}
@@ -486,6 +494,7 @@ rl.on('line', async (line) => {
         case "?":
         case "help":
             ccon("-- VCoinX --", "red");
+            ccon("(i)nfo	- полная информация об аккаунте.");
             ccon("stop(pause)	- остановка майнера.");
             ccon("start(run)	- запуск майнера.");
             ccon("(b)uy	- покупка улучшений.");

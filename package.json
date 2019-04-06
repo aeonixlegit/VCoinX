@@ -1,7 +1,7 @@
 {
   "name": "vcoinx",
   "version": "1.2.8",
-  "description": "VCoin modification w/o comission and donate ask.",
+  "description": "VCoin modification w/o comission and donation requests",
   "main": "index.js",
   "dependencies": {
     "colors": "^1.3.3",

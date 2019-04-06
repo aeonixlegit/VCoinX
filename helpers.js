@@ -15,7 +15,7 @@ let checkUpdateTTL = null,
     onUpdatesCB = false,
     offColors = false;
 
-function formateSCORE(e) {
+function formatScore(e) {
     return (arguments.length > 1 && void 0 !== arguments[1] && arguments[1]) ?
         function(e, t, n, a) {
             var r, o, c, s, i;
@@ -188,7 +188,7 @@ module.exports = {
     ccon,
     setColorsM,
     offColors,
-    formateSCORE,
+    formatScore,
     hashPassCoin,
     checkUpdates,
     checkUpdateTTL,
