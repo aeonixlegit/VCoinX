@@ -556,7 +556,7 @@ for (var argn = 2; argn < process.argv.length; argn++) {
             }
             break;
         }
-        case '-autoBuyItem': {
+        case '-autobuyitem': {
             if (typeof dTest == "string" && dTest.length > 1 && dTest.length < 20) {
                 if (!Entit.titles[dTest]) return;
                 con("Для автопокупки выбрано: " + Entit.titles[dTest]);
@@ -616,7 +616,7 @@ for (var argn = 2; argn < process.argv.length; argn++) {
             break;
         }
 
-        case '-autoBuy': {
+        case '-autobuy': {
             if (smartBuy == true) {
                 ccon('Не допускается использование -smartBuy и -autoBuy вместе');
                 process.exit();
@@ -632,7 +632,7 @@ for (var argn = 2; argn < process.argv.length; argn++) {
             break;
         }
 
-        case '-smartBuy': {
+        case '-smartbuy': {
             if (autoBuy == true) {
                 ccon('Не допускается использование -smartBuy и -autoBuy вместе');
                 process.exit();
