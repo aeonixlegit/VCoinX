@@ -112,7 +112,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
         if (transferPercent) {
             transferCoins = Math.floor(score / 1000 * (transferPercent / 100))
         }
-        if (transferTo && ((Math.floor(Date.now() / 1000) - transferLastTime) > transferInterval)) {
+        if (transferTo && (transferPercent || transferCoins) && transferInterval && ((Math.floor(Date.now() / 1000) - transferLastTime) > transferInterval)) {
             try {
                 let template;
                 if (transferCoins >= 9e6) {
@@ -124,7 +124,7 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                     template = "Автоматически переведено [" + formatScore(minCoins * 1e3, true) + "] коинов с текущенго аккаунта (@id" + USER_ID + ") на @id" + transferTo;
                 }
                 transferLastTime = Math.floor(Date.now() / 1000);
-                ccon(template, "black", "Green");
+                con(template, "black", "Green");
                 try {
                     await infLog(template);
                 } catch (e) {}
