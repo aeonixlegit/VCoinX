@@ -55,6 +55,7 @@ let boosterTTL = null,
     tforce = false,
     transferTo = false,
     transferScore = 3e4,
+    transferPercent = false,
     transferInterval = 36e2,
     transferLastTime = 0,
     lastTry = 0,
@@ -104,6 +105,10 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
     setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + "top " + place + " > " + formateSCORE(score, true) + " coins.");
 
     if (place > 0 && !rl.isQst) {
+        if (transferPercent) {
+            transferScore = Math.floor(score * (transferScore / 100))
+        }
+
         if (transferTo && (transferScore * 1e3 < score || transferScore * 1e3 >= 9e9) && ((Math.floor(Date.now() / 1000) - transferLastTime) > transferInterval)) {
             try {
                 if (transferScore * 1e3 >= 9e9) {
@@ -312,6 +317,15 @@ function justPrices(d) {
     return temp;
 }
 
+function setSmartBuy() {
+    smartBuy = !smartBuy;
+    con("Умная покупка: " + (smartBuy ? "Включена" : "Отключена"));
+    if (autoBuy) {
+        autoBuy = false;
+    con("Автопокупка: " + (autoBuy ? "Включена" : "Отключена"));
+    }
+}
+
 rl.on('line', async (line) => {
     if (!URLWS) return;
 
@@ -402,10 +416,7 @@ rl.on('line', async (line) => {
             break;
 
         case 'smartbuy':
-            smartBuy = !smartBuy;
-            con("Умная покупка: " + (smartBuy ? "Включена" : "Отключена"));
-            autoBuy = false;
-            con("Автопокупка: " + (autoBuy ? "Включена" : "Отключена"));
+            setSmartBuy();
             break;
 
         case 'to':
@@ -424,6 +435,12 @@ rl.on('line', async (line) => {
             item = await rl.questionAsync("Введите сумму: ");
             transferScore = parseInt(item);
             con("Количество коинов для автоматического перевода " + transferScore + "");
+            break;
+
+        case 'tperc':
+            item = await rl.questionAsync("Введите процент: ");
+            transferPercent = parseInt(item);
+            con("Процент коинов для автоматического перевода: " + transferPercent + "%");
             break;
 
         case 'autobeep':
@@ -530,9 +547,7 @@ for (var argn = 2; argn < process.argv.length; argn++) {
         default:
             break;
     }
-    if (["-t", "-u", "-to", "-ti", "-tsum", "-autoBuyItem"].includes(process.argv[argn])) {
-        argn++;
-    }
+
 
     if (process.argv[argn] == '-autoBuyItem') {
         let dTest = process.argv[argn + 1];
@@ -561,6 +576,16 @@ for (var argn = 2; argn < process.argv.length; argn++) {
         }
     }
 
+    if (process.argv[argn] == '-tperc') {
+        let dTest = process.argv[argn + 1];
+        if (typeof dTest == "string" && dTest.length >= 1 && dTest.length < 10) {
+            transferPercent = parseInt(dTest);
+            con("Установлен процент коинов для автоматического перевода: " + transferPercent + "%");
+            argn++;
+            continue;
+        }
+    }
+
     if (process.argv[argn] == '-ti') {
         let dTest = process.argv[argn + 1];
         if (typeof dTest == "string" && dTest.length >= 1 && dTest.length < 10) {
@@ -578,6 +603,11 @@ for (var argn = 2; argn < process.argv.length; argn++) {
 
     if (process.argv[argn] == '-flog') {
         flog = true;
+        continue;
+    }
+
+    if (process.argv[argn] == '-smartBuy') {
+        setSmartBuy();
         continue;
     }
 
