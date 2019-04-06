@@ -119,9 +119,9 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
                     await vConinWS.transferToUser(transferTo, score);
                     template = "Автоматически переведено [" + formatScore(score, true) + "] коинов с текущенго аккаунта (@id" + USER_ID + ") на @id" + transferTo;
                 } else {
-                    let minScore = Math.min(coins, transferCoins * 1e3); //Для предотврашения ошибки "не хватает денег"
-                    await vConinWS.transferToUser(transferTo, minScore);
-                    template = "Автоматически переведено [" + formatScore(minScore, true) + "] коинов с текущенго аккаунта (@id" + USER_ID + ") на @id" + transferTo;
+                    let minCoins = Math.min(coins, transferCoins); //Для предотврашения ошибки "не хватает денег"
+                    await vConinWS.transferToUser(transferTo, minCoins);
+                    template = "Автоматически переведено [" + formatScore(minCoins * 1e3, true) + "] коинов с текущенго аккаунта (@id" + USER_ID + ") на @id" + transferTo;
                 }
                 transferLastTime = Math.floor(Date.now() / 1000);
                 ccon(template, "black", "Green");
