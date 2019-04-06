@@ -99,12 +99,13 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
     if (place > 0 && !rl.isQst) {
         if (transferTo && (transferScore * 1e3 < score || transferScore * 1e3 >= 9e9) && ((Math.floor(Date.now() / 1000) - transferLastTime) > transferInterval)) {
             try {
+                let template;
                 if (transferScore * 1e3 >= 9e9) {
                     await vConinWS.transferToUser(transferTo, score);
-                    let template = "Автоматически переведено [" + formateSCORE(score * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
+                    template = "Автоматически переведено [" + formateSCORE(score * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
                 } else {
                     await vConinWS.transferToUser(transferTo, transferScore);
-                    let template = "Автоматически переведено [" + formateSCORE(transferScore * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
+                    template = "Автоматически переведено [" + formateSCORE(transferScore * 1e3, true) + "] коинов от @id" + USER_ID + " к @id" + transferTo;
                 }
                 con(template, "black", "Green");
                 try {
@@ -281,10 +282,10 @@ function forceRestart(t, force) {
         startBooster(t);
 }
 
-function lPrices(d) {
+function lPrices() {
     let temp = "";
     temp += Entit.names.map(el => {
-        return !miner.hasMoney(el) && d ? "" : "\n> [" + el + "] " + Entit.titles[el] + " - " + formateSCORE(miner.getPriceForItem(el), true);
+        return ccon("\n> [" + el + "] " + Entit.titles[el] + " - " + formateSCORE(miner.getPriceForItem(el), true), miner.hasMoney(el) ? "green" : "red", "Black", true);
     });
     return temp;
 }
@@ -346,9 +347,8 @@ rl.on('line', async (line) => {
 
         case 'b':
         case 'buy':
-            temp = lPrices(true);
             ccon("-- Доступные ускорения и их цены --", "red");
-            ccon(temp);
+            ccon(lPrices());
             item = await rl.questionAsync("Введи название ускорения [cursor, cpu, cpu_stack, computer, server_vk, quantum_pc, datacenter]: ");
             var array = item.split(" ");
             for (var i = 0, j = array.length; i < j; i++) {
@@ -412,9 +412,8 @@ rl.on('line', async (line) => {
         case 'p':
         case 'price':
         case 'prices':
-            temp = lPrices(true);
             ccon("-- Цены --", "red");
-            ccon(temp);
+            ccon(lPrices());
 
             break;
 
@@ -442,7 +441,7 @@ rl.on('line', async (line) => {
         case "?":
         case "help":
             ccon("-- VCoinX --", "red");
-            ccon("info	- обновление текущенго уровня.");
+            ccon("debug(info)	- отображение текущего состояния.");
             ccon("stop(pause)	- остановка майнера.");
             ccon("start(run)	- запуск майнера.");
             ccon("(b)uy	- покупка улучшений.");
