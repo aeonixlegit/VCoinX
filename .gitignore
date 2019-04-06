@@ -1,6 +1,7 @@
 # Dependency directories
 node_modules/
 
+myFarm.sh
 config.js
 log.txt
 .htpasswd
