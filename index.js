@@ -578,15 +578,15 @@ for (var argn = 2; argn < process.argv.length; argn++) {
               process.exit();
             }
             if (typeof dTest == "string" && dTest.length >= 1 && dTest.length < 10) {
-                transferScore = parseInt(dTest);
-                con("Установлено количество коинов для автоматического перевода: " + transferScore + " коинов.");
+                transferCoins = parseInt(dTest);
+                con("Установлено количество коинов для автоматического перевода: " + transferCoins + " коинов.");
                 argn++;
                 continue;
             }
         }
 
         case '-tperc': {
-            if (transferScore !== 3e4) { //default
+            if (transferCoins !== 3e4) { //default
               ccon('Не допускается использование -tsum и -tperc вместе');
               process.exit();
             }
