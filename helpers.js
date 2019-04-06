@@ -42,10 +42,7 @@ colors.setTheme({
 });
 
 function con(message, color, colorBG) {
-    if (message === undefined) {
-        console.log("\n")
-        return;
-    }
+    if (message === undefined) return console.log("\n")
     let temp = (!offColors ? colors.dateBG('[' + dateF() + ']') : dateF()) + ": " + ccon(message, color, colorBG, 1);
     console.log(temp);
 }
