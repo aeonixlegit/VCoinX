@@ -16,8 +16,13 @@ const {
     con,
     ccon,
     setColorsM,
+<<<<<<< HEAD
     formatScore,
     hashPassCoin,
+=======
+    formateSCORE,
+    // hashPassCoin,
+>>>>>>> upstream/master
     rl,
     existsFile,
     existsAsync,
@@ -105,8 +110,12 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
         trsum = 3e6;
 
     miner.setScore(score);
+<<<<<<< HEAD
 
     setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + "top " + place + " > " + formatScore(score, true) + " coins.");
+=======
+    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() +  ") > " + "top " + place + " > " + formateSCORE(score, true) + " coins.");
+>>>>>>> upstream/master
 
     if (place > 0 && !rl.isQst) {
         if (transferPercent) {
@@ -215,7 +224,11 @@ vConinWS.onReceiveDataEvent(async (place, score) => {
 });
 
 vConinWS.onTransfer(async (id, score) => {
+<<<<<<< HEAD
     let template = "Пользватель @id" + USER_ID + " получил [" + formatScore(score, true) + "] коинов от @id" + id;
+=======
+    let template = "Пользователь @id" + USER_ID + " получил [" + formateSCORE(score, true) + "] коинов от @id" + id;
+>>>>>>> upstream/master
     con(template, "green", "Black");
     try {
         await infLog(template);
@@ -700,9 +713,9 @@ updateLink();
 function formatWSS(LINK) {
     let GSEARCH = url.parse(LINK),
         NADDRWS = GSEARCH.protocol.replace("https:", "wss:").replace("http:", "ws:") + "//" + GSEARCH.host + "/channel/",
-        CHANNEL = USER_ID % 16;
+        CHANNEL = USER_ID % 32;
 
-    URLWS = NADDRWS + CHANNEL + GSEARCH.search + "&pass=".concat(Entit.hashPassCoin(USER_ID, 0));
+    URLWS = NADDRWS + CHANNEL + "/" + GSEARCH.search + "&ver=1&pass=".concat(Entit.hashPassCoin(USER_ID, 0));
     switch (currentServer) {
         case 1:
             URLWS = URLWS.replace(/([\w-]+\.)*vkforms\.ru/, "bagosi-go-go.vkforms.ru");
