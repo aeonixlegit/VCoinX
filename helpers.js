@@ -184,13 +184,8 @@ module.exports = {
     ccon,
     setColorsM,
     offColors,
-<<<<<<< HEAD
     formatScore,
-    hashPassCoin,
-=======
-    formateSCORE,
-    // hashPassCoin,
->>>>>>> upstream/master
+    //hashPassCoin,
     checkUpdates,
     checkUpdateTTL,
     onUpdates: cb => (onUpdatesCB = cb, true),
