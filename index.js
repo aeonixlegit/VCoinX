@@ -615,6 +615,22 @@ for (var argn = 2; argn < process.argv.length; argn++) {
                 smartBuy = false;
                 break;
             }
+        case "-tperc":
+                if (dTest.length >= 1 && dTest.length < 10) {
+                        item = dTest
+                        transferPercent = parseInt(item);
+                        con("Процент коинов для автоматического перевода: " + transferPercent + "%");
+                        argn++;
+                }
+                break;
+        case '-setlimit':
+            if (dTest.length >= 1 && dTest.length < 10) {
+                    item = dTest
+                    limitCPS = parseInt(item.replace(/,/g, ''));
+                    con("Установлен новый лимит коинов / тик для SmartBuy & AutoBuy: " + formatScore(limitCPS, true));
+                    argn++;
+            }
+            break;
 
         case '-smartbuy':
             {
