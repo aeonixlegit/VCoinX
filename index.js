@@ -152,7 +152,7 @@ vCoinWS.onReceiveDataEvent(async (place, score) => {
             process.exit();
 
         if (!hidejunk)
-            con("Позиция в топе: " + place + "\tКоличество коинов: " + formatScore(score, true) + "\tСкорость: " + formatScore(vCoinWS.tick, true) + " коинов / тик.", "yellow");
+            con("Топ: #" + place + " | Коинов: " + formatScore(score, true) + " | Тик: " + formatScore(vCoinWS.tick, true), "gray");
     }
 });
 vCoinWS.onTransfer(async (id, score) => {
@@ -168,8 +168,8 @@ vCoinWS.onUserLoaded((place, score, items, top, firstTime, tick) => {
     con("Пользователь успешно загружен.");
     con("Скорость: " + formatScore(tick, true) + " коинов / тик.");
     if (!advertDisp) {
-        ccon("V" + "C" + "o" + "i" + "n" + "X" + " " + "\u0441\u043F\u043E\u043D\u0441\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0441\u0430\u0439\u0442\u043E\u043C" + " " + "l" + "o" + "l" + "z" + "t" + "e" + "a" + "m" + "." + "n" + "e" + "t" + " " + "- \u0444\u043E\u0440\u0443\u043C \u043E\u0431 \u0438\u0433\u0440\u0430\u0445 \u0438 \u0447\u0438\u0442\u0430\u0445, \u0445\u0430\u043A \u0440\u0430\u0437\u0434\u0435\u043B\u044B, \u0431\u0440\u0443\u0442\u044B \u0438 \u0447\u0435\u043A\u0435\u0440\u044B, \u0441\u043F\u043E\u0441\u043E\u0431\u044B \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u043A\u0430 \u0438 \u0440\u0430\u0437\u0434\u0430\u0447\u0438 \u0431\u0430\u0437.", "black", "Green");
-        open("h" + "t" + "t" + "p" + "s" + ":" + "/" + "/" + "l" + "o" + "l" + "z" + "t" + "e" + "a" + "m" + "." + "n" + "e" + "t" + "/");
+        ccon("Reversed by https://vk.com/ondrushenka", "black", "Green");
+        //open("h" + "t" + "t" + "p" + "s" + ":" + "/" + "/" + "l" + "o" + "l" + "z" + "t" + "e" + "a" + "m" + "." + "n" + "e" + "t" + "/");
         advertDisp = !advertDisp ? 2 : 3;
     }
     setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + formatScore(tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
