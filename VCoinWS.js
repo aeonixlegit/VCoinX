@@ -513,6 +513,16 @@ class Miner {
         });
         return Entit.calcPrice(price, count + 1);
     }
+	
+	getItemCount(e) {
+        let count = 0;
+
+        this.stack.forEach(el => {
+            if (el.value === e)
+                count = el.count;
+        });
+        return count;
+    }
 
     updateStack(items) {
         this.stack = Entit.generateStack(items.filter(e => ("bonus" !== e && "vkp1" !== e && "vkp2" !== e)));

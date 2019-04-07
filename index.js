@@ -314,7 +314,7 @@ function forceRestart(t, force) {
 function lPrices(d) {
     let temp;
     temp = Entit.names.map(el => {
-        return !miner.hasMoney(el) && d ? "" : "\n> [" + el + "] " + Entit.titles[el] + " - " + formatScore(miner.getPriceForItem(el), true);
+        return !miner.hasMoney(el) && d ? "" : "\n> [" + el + "] " + Entit.titles[el] + "(" + miner.getItemCount(el) + " > " + (miner.getItemCount(el) + 1) + ") - " + formatScore(miner.getPriceForItem(el), true);
     }).toString();
     return temp;
 }
