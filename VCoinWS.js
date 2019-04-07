@@ -514,7 +514,7 @@ class Miner {
         return Entit.calcPrice(price, count + 1);
     }
 	
-	getItemCount(e) {
+    getItemCount(e) {
         let count = 0;
 
         this.stack.forEach(el => {
