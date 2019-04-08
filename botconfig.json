@@ -11,6 +11,7 @@
     "autobeep": false,
     "hidejunk": false,
     "tforce": false,
+    "tmove": true,
     "transferTo": false,
     "transferCoins": 3e4,
     "transferPercent": 0,
