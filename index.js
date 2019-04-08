@@ -49,6 +49,7 @@ let {
     autobeep,
     hidejunk,
     tforce,
+    tmove,
     transferTo,
     transferCoins,
     transferPercent,
@@ -65,6 +66,7 @@ let boosterTTL = null,
     xRestart = true,
     transferLastTime = 0,
     lastTry = 0,
+    old_place = 0,
     currentServer = 0;
 let tempDataUpdate = {
     canSkip: false,
@@ -155,7 +157,13 @@ vCoinWS.onReceiveDataEvent(async (place, score) => {
         }
         if (advertDisp == 0x1)
             process.exit();
-
+        if (tmove && place != old_place)
+            if (old_place == 0)
+                old_place = place
+            else {
+                con("Теперь мы: " + place + "\tСтарая позиция: " + old_place + "\t\tПрирост: " + (old_place-place))
+                old_place = place
+            }
         if (!hidejunk)
             con("Позиция в топе: " + place + "\tКоличество коинов: " + formatScore(score, true) + "\tСкорость: " + formatScore(vCoinWS.tick, true) + " коинов / тик.", "yellow");
     }
