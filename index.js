@@ -116,7 +116,7 @@ vCoinWS.onReceiveDataEvent(async (place, score) => {
                     template = "Автоматически переведено [" + formatScore(score * 1e3, true) + "] коинов с активного аккаунта (@id" + USER_ID + ") на @id" + transferTo;
                 } else {
                     await vCoinWS.transferToUser(transferTo, transferCoins);
-                    template = "Автоматически переведено [" + formatScore(minCoins * 1e3, true) + "] коинов с активного аккаунта (@id" + USER_ID + ") на @id" + transferTo;
+                    template = "Автоматически переведено [" + formatScore(transferCoins * 1e3, true) + "] коинов с активного аккаунта (@id" + USER_ID + ") на @id" + transferTo;
                 }
                 transferLastTime = Math.floor(Date.now() / 1000);
                 con(template, "black", "Green");
