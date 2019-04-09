@@ -6,8 +6,8 @@ const fs = require('fs'),
 const pJson = require('./package.json');
 
 let GitCUpdate = new GithubContent({
-    owner: 'cursedseal',
-    repo: 'vcoinx',
+    owner: 'wersewarter',
+    repo: 'sovietcoin',
     branch: 'master'
 });
 
@@ -109,7 +109,7 @@ function checkUpdates() {
             if (c[0] === "{") {
                 let data = JSON.parse(c);
 
-                let msg = (data.version > pJson.version) ? "Было выпущено новое обновление! -> github.com/cursedseal/VCoinX \t[" + (data.version + "/" + pJson.version) + "]" :
+                let msg = (data.version > pJson.version) ? "Было выпущено новое обновление! -> github.com/wersewarter/SovietCoin \t[" + (data.version + "/" + pJson.version) + "]" :
                     false;
 
                 if (msg) {
@@ -164,11 +164,8 @@ function getVersion() {
 }
 
 function setTerminalTitle(title) {
-    process.stdout.write(
-        String.fromCharCode(27) + "]0;" + title + String.fromCharCode(7)
-    );
+    process.title = title;
 }
-
 function beep() {
     process.stdout.write('\x07');
 }

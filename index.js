@@ -103,7 +103,7 @@ vCoinWS.onReceiveDataEvent(async (place, score) => {
     var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
         trsum = 3e6;
     miner.setScore(score);
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + formatScore(vCoinWS.tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + formatScore(vCoinWS.tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
     if (place > 0 && !rl.isQst) {
         if (transferPercent) {
             transferCoins = Math.floor(score / 1000 * (transferPercent / 100))
@@ -172,12 +172,7 @@ vCoinWS.onTransfer(async (id, score) => {
 vCoinWS.onUserLoaded((place, score, items, top, firstTime, tick) => {
     con("Пользователь успешно загружен.");
     con("Скорость: " + formatScore(tick, true) + " коинов / тик.");
-    if (!advertDisp) {
-        ccon("V" + "C" + "o" + "i" + "n" + "X" + " " + "\u0441\u043F\u043E\u043D\u0441\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0441\u0430\u0439\u0442\u043E\u043C" + " " + "l" + "o" + "l" + "z" + "t" + "e" + "a" + "m" + "." + "n" + "e" + "t" + " " + "- \u0444\u043E\u0440\u0443\u043C \u043E\u0431 \u0438\u0433\u0440\u0430\u0445 \u0438 \u0447\u0438\u0442\u0430\u0445, \u0445\u0430\u043A \u0440\u0430\u0437\u0434\u0435\u043B\u044B, \u0431\u0440\u0443\u0442\u044B \u0438 \u0447\u0435\u043A\u0435\u0440\u044B, \u0441\u043F\u043E\u0441\u043E\u0431\u044B \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u043A\u0430 \u0438 \u0440\u0430\u0437\u0434\u0430\u0447\u0438 \u0431\u0430\u0437.", "black", "Green");
-        open("h" + "t" + "t" + "p" + "s" + ":" + "/" + "/" + "l" + "o" + "l" + "z" + "t" + "e" + "a" + "m" + "." + "n" + "e" + "t" + "/");
-        advertDisp = !advertDisp ? 2 : 3;
-    }
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + formatScore(tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + formatScore(tick, true) + " cps > " + "top " + place + " > " + formatScore(score, true) + " coins.");
     miner.setActive(items);
     miner.updateStack(items);
     if (boosterTTL)
@@ -189,7 +184,7 @@ vCoinWS.onUserLoaded((place, score, items, top, firstTime, tick) => {
 });
 vCoinWS.onBrokenEvent(_ => {
     con("Обнаружен brokenEvent, видимо сервер сломался.\n\t\tЧерез 10 секунд будет выполнен перезапуск.", true);
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + "BROKEN");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + "BROKEN");
     tempDataUpdate.onBrokenEvent = true;
     xRestart = false;
     if (autobeep)
@@ -205,7 +200,7 @@ vCoinWS.onBrokenEvent(_ => {
 });
 vCoinWS.onAlreadyConnected(_ => {
     con("Обнаружено открытие приложения с другого устройства.\n\t\tЧерез 30 секунд будет выполнен перезапуск.", true);
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + "ALREADY_CONNECTED");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + "ALREADY_CONNECTED");
     if (autobeep)
         beep();
     forceRestart(3e4, true);
@@ -222,16 +217,16 @@ vCoinWS.onOffline(_ => {
         con("Достигнут лимит попыток подключиться к серверу.\n\t\t\tПроизводится смена сервера...", true);
         updateLink();
     }
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + "OFFLINE");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + "OFFLINE");
     forceRestart(2e4, true);
 });
 async function startBooster(tw) {
     tryStartTTL && clearTimeout(tryStartTTL);
     tryStartTTL = setTimeout(() => {
-        con("VCoinX загружается...");
+        con("SovietCoin загружается...");
         vCoinWS.userId = USER_ID;
         vCoinWS.run(URLWS, _ => {
-            con("VCoinX загружен...");
+            con("SovietCoin загружен...");
             xRestart = true;
         });
     }, (tw || 1e3));
@@ -241,7 +236,7 @@ function forceRestart(t, force) {
     vCoinWS.close();
     if (boosterTTL)
         clearInterval(boosterTTL);
-    setTerminalTitle("VCoinX " + getVersion() + " (id" + USER_ID.toString() + ") > " + "RESTARTING");
+    setTerminalTitle("SovietCoin " + getVersion() + " (id" + USER_ID.toString() + ") > " + "RESTARTING");
     if (xRestart || force)
         startBooster(t);
 }
@@ -304,7 +299,7 @@ rl.on('line', async (line) => {
         case "start":
         case "run":
             if (vCoinWS.connected)
-                return con("VCoinX уже запущен и работает!");
+                return con("SovietCoin уже запущен и работает!");
             xRestart = true;
             startBooster();
             break;
@@ -451,7 +446,7 @@ rl.on('line', async (line) => {
             break;
         case "?":
         case "help":
-            ccon("-- VCoinX --", "red");
+            ccon("-- SovietCoin --", "red");
             ccon("info - отображение основной информации.");
             ccon("debug - отображение тестовой информации.");
             ccon("stop(pause)	- остановка майнера.");
@@ -466,9 +461,13 @@ rl.on('line', async (line) => {
             ccon("autobuy - изменить статус авто-покупки.");
             ccon("autobuyitem - указать предмет(ы) для авто-покупки.");
             ccon("setlimit(sl) - установить лимит коинов / тик, до которого будет рабоать авто и умная покупка.");
-            ccon("smartbuy - изменить статус умной покупки.")
+            ccon("smartbuy - изменить статус умной покупки.");
             ccon("percentforsmartbuy - процент средств, выделяемый для приобретений улучшений с помощью умной покупки.");
             ccon("color - изменить цветовую схему консоли.");
+            ccon("id - узнать свой id")
+            break;
+        case 'id':
+            con("Твой id -> " + USER_ID.toString());
             break;
     }
 });
@@ -700,7 +699,7 @@ async function smartBuyFunction(score) {
 function updateLink() {
     if (!IFRAME_URL || tforce) {
         if (!VK_TOKEN && !LOGIN && !PASSWORD) {
-            con("Отсутствует токен. Информация о его получении расположена на -> github.com/cursedseal/VCoinX", true);
+            con("Отсутствует токен. Информация о его получении расположена на -> github.com/wersewarter/sovietcoin", true);
             return process.exit();
         }
         (async function inVKProc(token) {
@@ -747,7 +746,7 @@ function updateLink() {
                         case 'FAILED_PASSED_TWO_FACTOR':
                         case 'MISSING_TWO_FACTOR_HANDLER':
                         case 'MISSING_CAPTCHA_HANDLER':
-                            ccon("Требуется ввод капчи, но VCoinX сам этого делать пока не умеет :(", true, true, false);
+                            ccon("Требуется ввод капчи, но SovietCoin сам этого делать пока не умеет :(", true, true, false);
                             break;
                         default:
                             console.error(e);
@@ -778,7 +777,7 @@ function updateLink() {
                 startBooster();
             } catch (error) {
                 if (error.code && error.code == 5)
-                    ccon('Указан некорректный токен пользователя! Перепроверьте токен или получите новый, как указано в данном руководстве -> github.com/cursedseal/VCoinX', true, true, false);
+                    ccon('Указан некорректный токен пользователя! Перепроверьте токен или получите новый, как указано в данном руководстве -> github.com/cursedseal/SovietCoin', true, true, false);
                 else if (error.code && (error.code == 'ECONNREFUSED' || error.code == 'ENOENT'))
                     ccon('Не удалось подключиться API! Попробуйте перезагрузить роутер или установить VPN.', true, true, false);
                 else
