@@ -681,9 +681,12 @@ for (var argn = 2; argn < process.argv.length; argn++) {
     }
     case '-ti':
     {
-      if (dTest.length >= 1 && dTest.length < 10) {
-        transferInterval = parseInt(dTest)
-        argn++
+      if (dTest.length >= 0 && dTest.length < 10) {
+        let tmp = parseInt(dTest)
+        if (tmp > 0) {
+          transferInterval = tmp
+          argn++
+        }
       }
       break
     }
