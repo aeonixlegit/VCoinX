@@ -777,7 +777,7 @@ async function smartBuyFunction (score) {
       var min_payback = Math.min.apply(null, payback)
       var good = payback.indexOf(min_payback)
       var canBuy = names[good]
-      var min = prices[good] / 1000
+      var min = prices[good]
 
       con('Умной покупкой было проанализированно, что выгодно будет приобрести улучшение ' + Entit.titles[canBuy] + '.', 'green', 'Black')
       con('Стоимость: ' + formatScore(min, true) + ' коинов. Данное улучшение окупит себя примерно через ' + formatScore(min_payback, true) + ' минут ', 'green', 'Black')
